@@ -39,7 +39,7 @@ module.exports = function(backend) {
     var recipes = JSON.parse(fs.readFileSync('dev/data/recipes.json', 'utf8'));
     var onlineRecipes = [];
     var loadPictures = function () {
-        for (var i = 0; i < recipes.length; i++) {
+        for (var i = 0; i < 100; i++) {
             var recipe = recipes[i];
             request(ah.getRecipeByIdUrl(recipe.recept_id), function (err, response, body) {
 //                console.log("requesting:" + url);
