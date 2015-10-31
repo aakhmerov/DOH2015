@@ -5,6 +5,7 @@ var ah = {
     endpoint: 'https://frahmework.ah.nl/ah/json',
     productGroups: 'productgroepen',
     product: 'producten',
+    recipes: 'recepten',
     apikey: 'DpfBSit45NUq7qR1vRg9l7gDQCN9Quj7',
     getAHKeyApiParameter: function () {
         return "personalkey=" + this.apikey;
@@ -17,6 +18,13 @@ var ah = {
     },
     getProductsInGroupUrl : function (group) {
         return this.endpoint + "/" + this.product + "?" + this.getProductGroupParameter(group) + "&" + this.getAHKeyApiParameter();
+    },
+    getRecipeIngridientParameter : function (product) {
+        return "receptingredienten=" + product;
+    },
+//  pass recepttrefwoord as a parameter
+    getRecipeByProductUrl : function (product) {
+        return this.endpoint + "/" + this.recipes + "?" + this.getRecipeIngridientParameter(product) + "&" + this.getAHKeyApiParameter();
     }
 };
 
@@ -81,7 +89,7 @@ module.exports = function(backend) {
                         var group = groups[i];
                         var url = ah.getProductsInGroupUrl(group['assortimentsgroepoms']);
 
-                        console.log(url);
+//                        console.log(url);
                         asyncTasks.push(function(innerCallback){
                             request(url, function (err, response, body) {
                                 // JSON body
@@ -91,7 +99,14 @@ module.exports = function(backend) {
                                     return;
                                 }
                                 var obj = JSON.parse(body);
-                                innerCallback(false, obj);
+                                var filtered = [];
+                                for (var k = 0; k < obj.length; k++) {
+                                    if (obj[k]['recepttrefwoord']){
+                                        filtered.push(obj[k]);
+                                    }
+                                }
+
+                                innerCallback(false, filtered);
                             });
                         });
 
@@ -121,6 +136,42 @@ module.exports = function(backend) {
                 }
 //                    console.log(results);
                 res.send({products: results});
+            }
+        );
+    });
+
+    backend.use('/recipesByProduct/:tag', function (req, res, next) {
+//      recepttrefwoord
+        var tag = req.params.tag;
+        async.waterfall([
+                /*
+                 * First external endpoint
+                 */
+                function (callback) {
+                    var url = ah.getRecipeByProductUrl(tag);
+                    request(url, function (err, response, body) {
+                        console.log("requesting:" + url);
+                        // JSON body
+                        if (err) {
+                            console.log(err);
+                            callback(true);
+                            return;
+                        }
+                        var obj = JSON.parse(body);
+                        callback(false, obj);
+                    });
+                },
+            ],
+            /*
+             * Collate results
+             */
+            function (err, results) {
+                if (err) {
+                    console.log(err);
+                    res.send(500, "Server Error");
+                    return;
+                }
+                res.send({recipes: results});
             }
         );
     });
