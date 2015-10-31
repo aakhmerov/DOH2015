@@ -26,11 +26,35 @@ var ah = {
 //  pass recepttrefwoord as a parameter
     getRecipeByProductUrl : function (product) {
         return this.endpoint + "/" + this.recipes + "?" + this.getRecipeIngridientParameter(product) + "&" + this.getAHKeyApiParameter();
+    },
+    getRecipeIdParameter : function (id) {
+        return "receptid=" + id;
+    },
+    getRecipeByIdUrl : function (id) {
+        return this.endpoint + "/" + this.recipes + "?" + this.getRecipeIdParameter(id) + "&" + this.getAHKeyApiParameter();
     }
 };
 
 module.exports = function(backend) {
     var recipes = JSON.parse(fs.readFileSync('dev/data/recipes.json', 'utf8'));
+    var onlineRecipes = [];
+    var loadPictures = function () {
+        for (var i = 0; i < recipes.length; i++) {
+            var recipe = recipes[i];
+            request(ah.getRecipeByIdUrl(recipe.recept_id), function (err, response, body) {
+//                console.log("requesting:" + url);
+                // JSON body
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                var obj = JSON.parse(body);
+                onlineRecipes.push(obj[0]);
+            });
+        }
+    };
+    loadPictures();
+    console.log(onlineRecipes.length);
     backend.use('/productGroups', function (req, res, next) {
         async.parallel([
                 /*
@@ -182,11 +206,14 @@ module.exports = function(backend) {
 //  cholesterolarm, glutenvrij, lactosevrij,
     backend.use('/recipesForAllergies/*', function (req, res, next) {
         var allergies = req.params[0].split('/');
-        console.log(recipes.length);
+        console.log(onlineRecipes.length);
         var results = [];
-        for (var i = 0; i < recipes.length; i++) {
-            var recipe = recipes[i];
-            if (allergies.indexOf(recipe.recept_allergeneninfo) < 0) {
+
+        for (var i = 0; i < onlineRecipes.length; i++) {
+            var recipe = onlineRecipes[i];
+//            console.log(recipe);
+            console.log(recipe['receptallergeneninfo']);
+            if ((!recipe.receptallergeneninfo && recipe.receptallergeneninfo !=='') || allergies.indexOf(recipe.receptallergeneninfo) < 0) {
                 results.push(recipe);
             }
         }
