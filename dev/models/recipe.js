@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 
 // Define our beer schema
-var RecipeSchema   = new mongoose.Schema({
+var RecipeSchema = new mongoose.Schema({
     name: String,
     type: String,
     quantity: Number
