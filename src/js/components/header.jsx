@@ -4,8 +4,12 @@ var ReactRouter = require('react-router');
 var Link = ReactRouter.Link;
 
 var Header = React.createClass({
-    render: function () {
-      return (<div>
+  render: function () {
+    return (<div>
+      <div className="logo">
+        <a href="/"><img src="/public/img/logo.png" alt="Logo"/></a>
+      </div>
+      <nav className="pull-right">
         <ul>
           <li>
             <Link to={`/`}>Home</Link>
@@ -17,7 +21,8 @@ var Header = React.createClass({
             <Link to={`/overview`}>Overview</Link>
           </li>
         </ul>
-      </div>);
+      </nav>
+    </div>);
     }
 
 });
