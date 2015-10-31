@@ -16,7 +16,8 @@ module.exports = function (grunt) {
         backend.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
         // load individual modules of the application
         require('../controllers/ah/ah.js')(backend);
-        require('../controllers/meal.js')(backend);
+        require('../controllers/planes/klm/klm.js')(backend);
+        require('../controllers/planes/transavia/transavia.js')(backend);
 
         backend.use('/', function (req, res, next) {
             return res.end("Nothing's here");
