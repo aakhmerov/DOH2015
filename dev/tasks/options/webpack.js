@@ -7,7 +7,7 @@ module.exports = function (grunt) {
         components: grunt.file.expand({cwd: 'public/js/components'}, "*")
           .map(function (page) {
             return path.join(path.resolve('public/js/components'), page);
-          })
+          }).concat([path.join(path.resolve('public/js'), 'router.js')])
       },
       output: {
         path: './public/js/',
