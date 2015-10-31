@@ -2,6 +2,7 @@
 var React = require('react');
 
 var FoodSelection = require('./../components/foodSelection');
+var DietSelection = require('./../components/dietSelection');
 
 var HomePage = React.createClass({
     getInitialState: function() {
@@ -25,8 +26,9 @@ var HomePage = React.createClass({
       var instance = this.state;
       return (<div className="col-md-offset-3 col-md-6">
             <hr/>
-            <FoodSelection />
+            <DietSelection />
             <hr/>
+            <FoodSelection />
         </div>);
     }
 });
