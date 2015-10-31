@@ -1,7 +1,7 @@
 var Recipe = require('../models/recipe');
 var express = require('express');
 
-module.exports = function( backend) {
+module.exports = function(backend) {
     var router = express.Router();
     var recipeRoute = backend.route('/recipe');
 
