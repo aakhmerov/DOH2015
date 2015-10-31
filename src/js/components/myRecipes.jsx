@@ -35,6 +35,7 @@ var RecipeItemWrapper = React.createClass({
             );
     }
 });
+
 var MyRecipes = React.createClass({
     getInitialState: function () {
         return {recipes : []};

@@ -1,5 +1,6 @@
 var async = require('async');
 var request = require('request');
+var fs = require('fs');
 
 var ah = {
     endpoint: 'https://frahmework.ah.nl/ah/json',
@@ -29,7 +30,7 @@ var ah = {
 };
 
 module.exports = function(backend) {
-
+    var recipes = JSON.parse(fs.readFileSync('dev/data/recipes.json', 'utf8'));
     backend.use('/productGroups', function (req, res, next) {
         async.parallel([
                 /*
@@ -174,5 +175,22 @@ module.exports = function(backend) {
                 res.send({recipes: results});
             }
         );
+    });
+
+
+
+//  cholesterolarm, glutenvrij, lactosevrij,
+    backend.use('/recipesForAllergies/*', function (req, res, next) {
+        var allergies = req.params[0].split('/');
+        console.log(recipes.length);
+        var results = [];
+        for (var i = 0; i < recipes.length; i++) {
+            var recipe = recipes[i];
+            if (allergies.indexOf(recipe.recept_allergeneninfo) < 0) {
+                results.push(recipe);
+            }
+        }
+        console.log(results.length);
+        res.send({recipes: results});
     });
 };
