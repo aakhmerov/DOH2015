@@ -8,7 +8,7 @@ var FoodSelection = require('./components/foodSelection');
 
 ReactDOM.render((
   <Router>
-    <Route path="/" component={FoodSelection}>
-    </Route>
+    <Route path="/" component={FoodSelection} />
+    <Route path="/" component={FoodSelection} />
   </Router>
 ), document.getElementById('root'));
