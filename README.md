@@ -23,12 +23,14 @@ Meal Customization Application for the flights booking
 
 ## API endpoints
 
-   http://localhost:7777/allProducts
-   http://localhost:7777/productGroups
-   http://localhost:7777/recipe
+   http://localhost:9000/api/allProducts
+   http://localhost:9000/api/productGroups
+   http://localhost:9000/api/recipe
 
-   http://localhost:7777/recipesByProduct/doperwten
-   http://localhost:7777/recipesByProduct/appelmoes
+   http://localhost:9000/api/recipesByProduct/doperwten
+   http://localhost:9000/api/recipesByProduct/appelmoes
+
+   http://localhost:9000/api/recipesForAllergies/lactosevrij/glutenvrij
 
 ## How to run
 
