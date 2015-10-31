@@ -21,7 +21,6 @@ var ah = {
 };
 
 module.exports = function( backend) {
-
     backend.use('/productGroups', function (req, res, next) {
         async.parallel([
                 /*

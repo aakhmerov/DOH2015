@@ -15,15 +15,13 @@ module.exports = function (grunt) {
         var backend = express();
         backend.use(bodyParser.json()); // for parsing application/json
         backend.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-        // Create a new route with the prefix /recipe
+        // load individual modules of the application
         require('../modules/ah/ah.js')(backend);
         require('../modules/meal.js')(backend);
 
         backend.use('/', function (req, res, next) {
             return res.end("Nothing's here");
         });
-
-
 
         http.createServer(backend).listen(7777).on('close', done);
     });
