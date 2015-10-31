@@ -31,6 +31,9 @@ Meal Customization Application for the flights booking
    http://localhost:9000/api/recipesByProduct/appelmoes
 
    http://localhost:9000/api/recipesForAllergies/lactosevrij/glutenvrij
+   http://localhost:9000/api/recipesForAllergies/lactosevrij/glutenvrij/vlees
+   
+   vlees, vis, gevogelte, vegetarsch
 
 ## How to run
 

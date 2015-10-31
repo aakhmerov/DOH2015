@@ -212,12 +212,23 @@ module.exports = function(backend) {
         for (var i = 0; i < onlineRecipes.length; i++) {
             var recipe = onlineRecipes[i];
 //            console.log(recipe);
-            console.log(recipe['receptallergeneninfo']);
-            if ((!recipe.receptallergeneninfo && recipe.receptallergeneninfo !=='') || allergies.indexOf(recipe.receptallergeneninfo) < 0) {
+//            console.log(recipe['receptclassificatie']);
+            var notAllergic = (!recipe.receptallergeneninfo && recipe.receptallergeneninfo !=='') ||
+                allergies.indexOf(recipe.receptallergeneninfo) < 0;
+
+            var inCategory = false;
+//            console.log(recipe);
+            for (var j = 0;j < allergies.length; j++) {
+                if (recipe['receptvleesvisofvega'] && recipe['receptvleesvisofvega'].indexOf(allergies[j]) >= 0) {
+                    inCategory = true;
+                    break;
+                }
+            }
+            if (notAllergic && inCategory) {
                 results.push(recipe);
             }
         }
-        console.log(results.length);
+//        console.log(results.length);
         res.send({recipes: results});
     });
 };
