@@ -2,7 +2,6 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var http = require('http');
 var path = require('path');
-var elements = require('../api/json/products.json');
 var async = require('async');
 var request = require('request');
 var mongoose = require('mongoose');
