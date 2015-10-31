@@ -7,6 +7,12 @@ module.exports = function (app) {
   app.use('/', router);
 };
 
+router.get('/overview', function (req, res) {
+  res.render('dishesoverview', {
+    meal: ['banaan', 'apple', 'hot dog']
+  });
+});
+
 router.get('/', function (req, res, next) {
   Article.find(function (err, articles) {
     if (err) return next(err);
