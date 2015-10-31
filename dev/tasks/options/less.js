@@ -7,7 +7,7 @@ module.exports = {
       paths: ["src/less"]
     },
     files: {
-      "target/css/main.css": "src/less/styles.less"
+      "public/css/main.css": "src/less/styles.less"
     }
 
   }

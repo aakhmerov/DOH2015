@@ -4,13 +4,13 @@ module.exports = function (grunt) {
   return {
     build: {
       entry: {
-        components: grunt.file.expand({cwd: 'target/js/components'}, "*")
+        components: grunt.file.expand({cwd: 'public/js/components'}, "*")
           .map(function (page) {
-            return path.join(path.resolve('target/js/components'), page);
+            return path.join(path.resolve('public/js/components'), page);
           })
       },
       output: {
-        path: './target/js/',
+        path: './public/js/',
         filename: '[name].js'
       },
       stats: {
