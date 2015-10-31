@@ -7,8 +7,18 @@ var FoodSelection = React.createClass({
     },
     render: function() {
       var instance = this.state;
-      return (<div className="col-md-12">
-        </div>);
+      return (<div className="col-md-offset-3 col-md-6">
+	    <ul className="col-md-12">
+	        <li className="col-xs-4 col-sm-3 col-md-3 col-lg-2 col-xl-2">
+	            <div className="blocks">
+	                <div className="blocks-height"></div>
+	                <div className="blocks-layer blocks-purple-white">
+	                    <div className="blocks-text">hallo</div>
+	                </div>
+	            </div>
+	        </li>
+	    </ul>
+	</div>);
     }
 
 });

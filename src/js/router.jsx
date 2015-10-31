@@ -9,6 +9,6 @@ var FoodSelection = require('./components/foodSelection');
 ReactDOM.render((
   <Router>
     <Route path="/" component={FoodSelection} />
-    <Route path="/" component={FoodSelection} />
+    <Route path="/overview" component={FoodSelection} />
   </Router>
 ), document.getElementById('root'));
