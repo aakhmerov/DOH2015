@@ -5,6 +5,9 @@ var Link = ReactRouter.Link;
 
 var Header = React.createClass({
   render: function () {
+    var getClassName = function(link) {
+      return link === this.props.active ? 'active' : ''
+    }.bind(this);
     return (<div className="header">
       <div className="row">
         <div className="col col-xs-3">
@@ -18,13 +21,13 @@ var Header = React.createClass({
               <div className="collapse navbar-collapse">
                 <ul className="nav navbar-nav navbar-right">
                   <li>
-                    <Link to={`/`}>Home</Link>
+                    <Link className={getClassName('home')} to={`/`}>Home</Link>
                   </li>
                   <li>
-                    <Link to={`/recipes`}>Recipes</Link>
+                    <Link className={getClassName('recipes')} to={`/recipes`}>Recipes</Link>
                   </li>
                   <li>
-                    <Link to={`/overview`}>Overview</Link>
+                    <Link className={getClassName('overview')} to={`/overview`}>Overview</Link>
                   </li>
                 </ul>
               </div>
