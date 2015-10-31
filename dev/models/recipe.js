@@ -4,7 +4,7 @@ var Product = require('./product');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
 // Define our beer schema
-var RecipeSchema   = new mongoose.Schema({
+var RecipeSchema = new mongoose.Schema({
     name: String,
     type: String,
     products: [{type: mongoose.Schema.Types.Mixed }]
