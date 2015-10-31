@@ -2,57 +2,145 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var elements = require('../api/json/products.json');
+var async = require('async');
+var request = require('request');
 
 var ah = {
-    endpoint : 'https://frahmework.ah.nl/ah/json',
-    productgrous : 'productgroepen',
-    product : 'producten',
-    apikey : 'DpfBSit45NUq7qR1vRg9l7gDQCN9Quj7',
-    getAHKeyApiParameter : function () {
+    endpoint: 'https://frahmework.ah.nl/ah/json',
+    productGroups: 'productgroepen',
+    product: 'producten',
+    apikey: 'DpfBSit45NUq7qR1vRg9l7gDQCN9Quj7',
+    getAHKeyApiParameter: function () {
         return "personalkey=" + this.apikey;
     },
-    getProductGroupParameter : function (group) {
-        return "assortimentsgroepoms" + group;
+    getProductGroupParameter: function (group) {
+        return "assortimentsgroepoms=" + group;
+    },
+    getProductGroupsRequest : function () {
+        return this.endpoint + "/" + this.productGroups + "?" + this.getAHKeyApiParameter();
+    },
+    getProductsInGroupUrl : function (group) {
+        return this.endpoint + "/" + this.product + "?" + this.getProductGroupParameter(group) + "&" + this.getAHKeyApiParameter();
     }
-}
+};
 
 module.exports = function (grunt) {
-    grunt.registerTask('server_stub', 'Custom backend stub', function() {
+    grunt.registerTask('server_stub', 'Custom backend stub', function () {
         var done = this.async();
         var backend = express();
 
-        backend.use('/products', function(req, res, next) {
+        backend.use('/products', function (req, res, next) {
             var results = elements;
             return res.end(JSON.stringify(results));
         });
 
-        backend.use('/productGrups', function(req, producsResponse, next) {
-            var path = "/" + ah.productgrous + "?" + ah.getAHKeyApiParameter();
-            var options = {
-              host: ah.endpoint,
-              path: path
-            };
-            var processGroupsResponse = function (response) {
-              var str = '';
-
-              //another chunk of data has been recieved, so append it to `str`
-              response.on('data', function (chunk) {
-                str += chunk;
-              });
-
-              //the whole response has been recieved, so we just print it out here
-              response.on('end', function () {
-                  producsResponse.end(JSON.stringify(data));
-              });
-            };
-            http.request(options, processGroupsResponse).end();            
+        backend.use('/productGroups', function (req, res, next) {
+            async.parallel([
+                    /*
+                     * First external endpoint
+                     */
+                    function (callback) {
+                        var url = ah.getProductGroupsRequest();
+                        request(url, function (err, response, body) {
+                            // JSON body
+                            if (err) {
+                                console.log(err);
+                                callback(true);
+                                return;
+                            }
+                            var obj = JSON.parse(body);
+                            callback(false, obj);
+                        });
+                    }
+                ],
+                /*
+                 * Collate results
+                 */
+                function (err, results) {
+                    if (err) {
+                        console.log(err);
+                        res.send(500, "Server Error");
+                        return;
+                    }
+                    res.send({api1: results[0]});
+                }
+            );
         });
 
+        backend.use('/allProducts', function (req, res, next) {
+            async.waterfall([
+                    /*
+                     * First external endpoint
+                     */
+                    function (callback) {
+                        var url = ah.getProductGroupsRequest();
+                        request(url, function (err, response, body) {
+                            // JSON body
+                            if (err) {
+                                console.log(err);
+                                callback(true);
+                                return;
+                            }
+                            var obj = JSON.parse(body);
+                            callback(false, obj);
+                        });
+                    },
+                    function (groups,callback) {
+                        var products = [];
+                        var asyncTasks = [];
+                        for (var i = 0; (i < groups.length && i < 1); i++) {
+                            var group = groups[i];
+                            var url = ah.getProductsInGroupUrl(group['assortimentsgroepoms']);
 
-        backend.use('/', function(req, res, next) {
+                            console.log(url);
+                            asyncTasks.push(function(innerCallback){
+                                request(url, function (err, response, body) {
+                                    // JSON body
+                                    if (err) {
+                                        console.log(err);
+                                        callback(true);
+                                        return;
+                                    }
+                                    var obj = JSON.parse(body);
+                                    innerCallback(false, obj);
+                                });
+                            });
+
+
+                        }
+                        async.parallel(asyncTasks, function(err, results) {
+                            // All tasks are done now
+                            var allProducts = [];
+                            for (var j = 0; j < results.length; j++) {
+                                var groupProducts = results[j];
+                                console.log(groupProducts.length);
+                                allProducts = allProducts.concat(groupProducts);
+                            }
+                            callback(false, allProducts);
+                        });
+
+                    }
+                ],
+                /*
+                 * Collate results
+                 */
+                function (err, results) {
+                    if (err) {
+                        console.log(err);
+                        res.send(500, "Server Error");
+                        return;
+                    }
+//                    console.log(results);
+                    res.send({products: results});
+                }
+            );
+        });
+
+        backend.use('/', function (req, res, next) {
             return res.end("Nothing's here");
         });
 
         http.createServer(backend).listen(7777).on('close', done);
     });
 };
+
