@@ -1,6 +1,6 @@
 var path = require('path');
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
   return {
     build: {
       entry: {
@@ -11,16 +11,15 @@ module.exports = function(grunt) {
       },
       output: {
         path: './target/js/',
-          filename: '[name].js'
+        filename: '[name].js'
       },
       stats: {
-        // Configure the console output
         colors: true,
-          modules: true,
-          reasons: true
+        modules: true,
+        reasons: true
       },
       progress: true,
-        keepalive: false
+      keepalive: false
     }
   }
 };
