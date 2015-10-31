@@ -22,11 +22,14 @@ module.exports = function (grunt) {
             },
             proxies: [
                 {
-                    context: '/scorecompass-api',
+                    context: '/api',
                     host: 'localhost',
-                    port: 9005,
-                    https: true,
-                    xforward: false
+                    port: 7777,
+                    https: false,
+                    xforward: false,
+                    rewrite: {
+                        '^/api': ''
+                    }
                 }
             ]
         }
