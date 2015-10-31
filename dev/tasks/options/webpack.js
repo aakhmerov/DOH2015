@@ -1,10 +1,13 @@
 var path = require('path');
 
-module.exports = function() {
+module.exports = function(grunt) {
   return {
     build: {
       entry: {
-        components: './target/js/components/gridComponent.js'
+        components: grunt.file.expand({cwd: 'target/js/components'}, "*")
+          .map(function (page) {
+            return path.join(path.resolve('target/js/components'), page);
+          })
       },
       output: {
         path: './target/js/',
