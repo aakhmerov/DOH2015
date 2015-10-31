@@ -6,28 +6,28 @@ var config = {
   development: {
     root: rootPath,
     app: {
-      name: 'tesst'
+      name: 'airplanemeal'
     },
     port: 3000,
-    db: 'mongodb://localhost/tesst-development'
+    db: 'mongodb://localhost/airplanemeal-development'
   },
 
   test: {
     root: rootPath,
     app: {
-      name: 'tesst'
+      name: 'airplanemeal'
     },
     port: 3000,
-    db: 'mongodb://localhost/tesst-test'
+    db: 'mongodb://localhost/airplanemeal-test'
   },
 
   production: {
     root: rootPath,
     app: {
-      name: 'tesst'
+      name: 'airplanemeal'
     },
     port: 3000,
-    db: 'mongodb://localhost/tesst-production'
+    db: 'mongodb://localhost/airplanemeal-production'
   }
 };
 
