@@ -13,7 +13,7 @@ module.exports = function( backend) {
         // Set the beer properties that came from the POST data
         recipe.name = req.body.name;
         recipe.type = req.body.type;
-        recipe.quantity = req.body.quantity;
+        recipe.products = req.body.products;
 
         // Save the beer and check for errors
         recipe.save(function(err) {
