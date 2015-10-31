@@ -2,12 +2,14 @@
 var React = require('react');
 
 var FoodSelection = React.createClass({
-    getInitialState: function() {
-      return this.props;
+    getInitialState: function () {
+        console.log('food selection init state');
+        return this.props;
     },
-    render: function() {
-      var instance = this.state;
-      return (<div className="col-md-12">
+    render: function () {
+        var instance = this.state;
+        return (<div className="col-md-12">
+        default
         </div>);
     }
 
