@@ -32,6 +32,9 @@ app.use(express.methodOverride());
 app.use(express.session({ secret: 'your secret code' }));
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 
 if (app.get('env') === 'development') {

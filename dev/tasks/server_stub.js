@@ -1,9 +1,15 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var http = require('http');
 var path = require('path');
 var elements = require('../api/json/products.json');
 var async = require('async');
 var request = require('request');
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/airplanemeal');
+var Recipe = require('../models/recipe');
+var router = express.Router();
+
 
 var ah = {
     endpoint: 'https://frahmework.ah.nl/ah/json',
@@ -24,10 +30,44 @@ var ah = {
     }
 };
 
+
+
 module.exports = function (grunt) {
     grunt.registerTask('server_stub', 'Custom backend stub', function () {
         var done = this.async();
         var backend = express();
+        backend.use(bodyParser.json()); // for parsing application/json
+        backend.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+        // Create a new route with the prefix /recipe
+        var recipeRoute = backend.route('/recipe');
+
+        // Create endpoint /api/beers for POSTS
+        recipeRoute.post(function(req, res) {
+            // Create a new instance of the Beer model
+            var recipe = new Recipe();
+
+            // Set the beer properties that came from the POST data
+            recipe.name = req.body.name;
+            recipe.type = req.body.type;
+            recipe.quantity = req.body.quantity;
+
+            // Save the beer and check for errors
+            recipe.save(function(err) {
+                if (err)
+                    res.send(err);
+
+                res.json({ message: 'Recipe added to the list!', data: recipe });
+            });
+        });
+
+        recipeRoute.get(function(req, res) {
+            Recipe.find(function(err, recipes) {
+                if (err)
+                    res.send(err);
+
+                res.json(recipes);
+            });
+        });
 
         backend.use('/products', function (req, res, next) {
             var results = elements;
@@ -114,7 +154,7 @@ module.exports = function (grunt) {
                             var allProducts = [];
                             for (var j = 0; j < results.length; j++) {
                                 var groupProducts = results[j];
-                                console.log(groupProducts.length);
+//                                console.log(groupProducts.length);
                                 allProducts = allProducts.concat(groupProducts);
                             }
                             callback(false, allProducts);
@@ -140,6 +180,8 @@ module.exports = function (grunt) {
         backend.use('/', function (req, res, next) {
             return res.end("Nothing's here");
         });
+
+
 
         http.createServer(backend).listen(7777).on('close', done);
     });
