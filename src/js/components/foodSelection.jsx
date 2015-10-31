@@ -30,9 +30,9 @@ var FoodSelection = React.createClass({
 
 	render: function() {
     	var instance = this.state;
-    	console.log(instance.recipes)
 			return (
 				<div className="recipes">
+                    <h3>Meals for you</h3>
 		 			{instance.recipes.recipes.map( function (recipe, i) {
 						return(<div className="recipe col col-md-4"><img className="recipe-image" src={recipe.receptafbeelding} />
 						<span className="recipe-title">{recipe.recepttitel}</span></div>);
