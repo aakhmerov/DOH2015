@@ -7,7 +7,7 @@ module.exports = function (app) {
   app.use('/', router);
 };
 
-router.get('/lol', function (req, res) {
+router.get('/overview', function (req, res) {
   res.render('dishesoverview', {
     meal: ['banaan', 'apple', 'hot dog']
   });
