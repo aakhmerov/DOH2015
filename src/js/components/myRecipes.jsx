@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 var React = require('react');
 var $ = require('../../vendor/jquery/dist/jquery.min');
+var Header = require('./header');
 
 var ProductItemWrapper = React.createClass({
     getInitialState: function () {
@@ -51,13 +52,16 @@ var MyRecipes = React.createClass({
         }.bind(this));
     },
     render: function () {
-        return (
-            <ul>
-                {this.state.recipes.map(function (result) {
-                    return <RecipeItemWrapper key={result._id} data={result}/>;
-                })}
-            </ul>
-        );
+      return (
+        <div>
+          <Header/>
+          <ul>
+            {this.state.recipes.map(function (result) {
+              return <RecipeItemWrapper key={result._id} data={result}/>;
+            })}
+          </ul>
+        </div>
+      );
     }
 });
 
