@@ -83,13 +83,21 @@ ul {
   box-shadow: 0px 0px 19px 0px rgba(50, 50, 50, 0.4);
 }
 
-.logo {
-  display: inline-block;
-  margin-bottom: -1.4em;
-  img {
-    width: 20em;
+.header {
+  .nav-container {
+    margin-top: 1.6em;
   }
-  &+nav {
-    display: inline-block;
+  img {
+    width: 15em;
+  }
+  ul li a {
+    color: #fcbb36;
+    font-size: 1.5em;
+    border: white solid 2px;
+    &:hover {
+      border: #fcbb36 solid 2px;
+      border-radius: 15px;
+      background-color: white;
+    }
   }
 }
