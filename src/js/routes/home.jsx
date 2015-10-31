@@ -3,7 +3,7 @@ var React = require('react');
 var Header = require('../components/header');
 var FoodSelection = require('./../components/foodSelection');
 var DietSelection = require('./../components/dietSelection');
-
+ 
 var HomePage = React.createClass({
     getInitialState: function() {
       return {
@@ -11,13 +11,19 @@ var HomePage = React.createClass({
         dietsFilter: []
       }
     },
-
+ 
+    handleFilterUpdate: function(filterValue) {
+        this.setState({
+            dietsFilter: filterValue
+        });
+    },
+ 
     render: function() {
       var instance = this.state;
       return (<div className="col-md-offset-3 col-md-6">
         <Header active="home"/>
             <hr/>
-            <DietSelection diets={this.state.diets} dietsfilter={this.state.dietsFilter} />
+            <DietSelection diets={this.state.diets} updateFilter={this.handleFilterUpdate} />
             <hr/>
             <FoodSelection dietsfilter={this.state.dietsFilter} />
         </div>);
