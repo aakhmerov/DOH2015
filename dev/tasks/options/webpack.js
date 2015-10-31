@@ -1,23 +1,23 @@
 var path = require('path');
 
 module.exports = function() {
-  //return {
-  //  build: {
-  //    entry: {
-  //      index: 'somepage'
-  //    },
-  //    output: {
-  //      path: path.join(__dirname,'../public/js/build'),
-  //        filename: 'bundle-[name].js'
-  //    },
-  //    stats: {
-  //      // Configure the console output
-  //      colors: true,
-  //        modules: true,
-  //        reasons: true
-  //    },
-  //    progress: true,
-  //      keepalive: true
-  //  }
-  //}
+  return {
+    build: {
+      entry: {
+        components: './target/js/components/gridComponent.js'
+      },
+      output: {
+        path: './target/js/',
+          filename: '[name].js'
+      },
+      stats: {
+        // Configure the console output
+        colors: true,
+          modules: true,
+          reasons: true
+      },
+      progress: true,
+        keepalive: false
+    }
+  }
 };
