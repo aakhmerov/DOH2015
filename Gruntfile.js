@@ -12,6 +12,6 @@ module.exports = function (grunt) {
     grunt.initConfig(config);
 
     grunt.registerTask('default', ['jshint','less']);
-    grunt.registerTask('serve', ['less','configureProxies:server', 'connect', 'watch:css']);
+    grunt.registerTask('serve', ['less', 'react', 'configureProxies:server', 'connect', 'watch:css']);
     grunt.registerTask('backend', ['server_stub']);
 };
