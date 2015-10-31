@@ -27,6 +27,9 @@ Meal Customization Application for the flights booking
    http://localhost:7777/productGroups
    http://localhost:7777/recipe
 
+   http://localhost:7777/recipesByProduct/doperwten
+   http://localhost:7777/recipesByProduct/appelmoes
+
 ## How to run
 
 * install mongodb
