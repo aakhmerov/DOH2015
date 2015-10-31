@@ -88,6 +88,7 @@ module.exports = function (grunt) {
                     function (groups,callback) {
                         var products = [];
                         var asyncTasks = [];
+//                      TODO: remove limit here
                         for (var i = 0; (i < groups.length && i < 1); i++) {
                             var group = groups[i];
                             var url = ah.getProductsInGroupUrl(group['assortimentsgroepoms']);

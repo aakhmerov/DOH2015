@@ -21,3 +21,8 @@ Meal Customization Application for the flights booking
 	Status:active
 	Created:11 seconds ago
 
+## API endpoints
+
+   http://localhost:7777/allProducts
+   http://localhost:7777/productGroups
+
