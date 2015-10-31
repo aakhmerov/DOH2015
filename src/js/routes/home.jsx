@@ -7,31 +7,19 @@ var DietSelection = require('./../components/dietSelection');
 var HomePage = React.createClass({
     getInitialState: function() {
       return {
-        diets: ['fruit', 'bread', 'meat', 'seafood', 'vegetable', 'devider', 'soy', 'peanut', 'lactose', 'glutten', 'egg', 'cholesterol']
+        diets: ['fruit', 'bread', 'meat', 'seafood', 'vegetable', 'devider', 'soy', 'peanut', 'lactose', 'glutten', 'egg', 'cholesterol'],
+        dietsFilter: []
       }
     },
-
-    // handleTreeClick: function(i) {
-    //     var instance = this;
-    //     var clickedTree = this.state.trees[i];
-
-    //     jQuery.get(this.props.treeSource+'/'+clickedTree.id+'/branch', function(result) {
-    //         instance.state.branches = result;
-    //         instance.state.currentState = 'branches';
-    //         console.log(clickedTree);
-    //         instance.state.breadcrumbs.push(clickedTree.name);
-    //         instance.setState(instance.state);
-    //     }.bind(this));
-    // },
 
     render: function() {
       var instance = this.state;
       return (<div className="col-md-offset-3 col-md-6">
         <Header active="home"/>
             <hr/>
-            <DietSelection diets={this.state.diets}/>
+            <DietSelection diets={this.state.diets} dietsfilter={this.state.dietsFilter} />
             <hr/>
-            <FoodSelection />
+            <FoodSelection dietsfilter={this.state.dietsFilter} />
         </div>);
     }
 });

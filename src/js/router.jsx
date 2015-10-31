@@ -6,11 +6,13 @@ var Route = ReactRouter.Route;
 var FoodSelection = require('./components/foodSelection');
 var MyRecipes = require('./components/myRecipes');
 var HomePage = require('./routes/home');
+var Transavia = require('./components/transaviaFlight');
 
 ReactDOM.render((
   <Router>
     <Route path="/" component={HomePage} />
     <Route path="/overview" component={HomePage} />
     <Route path="/recipes" component={MyRecipes} />
+    <Route path="/transavia" component={Transavia} />
   </Router>
 ), document.getElementById('root'));

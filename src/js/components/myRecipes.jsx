@@ -56,7 +56,7 @@ var MyRecipes = React.createClass({
         <div>
           <Header active="recipes"/>
           <ul>
-            {this.state.recipes.map(function (result) {
+            {this.props.recipes.map(function (result) {
               return <RecipeItemWrapper key={result._id} data={result}/>;
             })}
           </ul>
