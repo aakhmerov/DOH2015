@@ -6,7 +6,9 @@ var DietSelection = require('./../components/dietSelection');
 
 var HomePage = React.createClass({
     getInitialState: function() {
-      return this.props;
+      return {
+        diets: ['fruit', 'bread', 'meat']
+      }
     },
 
     // handleTreeClick: function(i) {
@@ -27,7 +29,7 @@ var HomePage = React.createClass({
       return (<div className="col-md-offset-3 col-md-6">
         <Header/>
             <hr/>
-            <DietSelection />
+            <DietSelection diets={this.state.diets}/>
             <hr/>
             <FoodSelection />
         </div>);
