@@ -9,7 +9,7 @@ module.exports = function (app) {
 
 router.get('/overview', function (req, res) {
   res.render('dishesoverview', {
-    meal: ['banaan', 'apple', 'hot dog']
+    meal: ['banaan', 'apple', 'hot dog', 'banaan', 'apple', 'hot dog']
   });
 });
 

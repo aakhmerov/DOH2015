@@ -1,7 +1,9 @@
 /** @jsx React.DOM */
+var React = require('react');
+var ReactDOM = require('react-dom');
 
 // The above declaration must remain intact at the top of the script.
-var converter = new Showdown.converter();
+//var converter = new Showdown.converter();
 
 var Comment = React.createClass({displayName: "Comment",
     render: function() {
@@ -94,8 +96,3 @@ var CommentList = React.createClass({displayName: "CommentList",
 });
 
 console.log("hello");
-
-React.renderComponent(
-    React.createElement(Products, {url: "/products", pollInterval: 2000}),
-    document.getElementById('content')
-);
