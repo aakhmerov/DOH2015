@@ -16,8 +16,8 @@ module.exports = function (grunt) {
         backend.use(bodyParser.json()); // for parsing application/json
         backend.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
         // load individual modules of the application
-        require('../modules/ah/ah.js')(backend);
-        require('../modules/meal.js')(backend);
+        require('../controllers/ah/ah.js')(backend);
+        require('../controllers/meal.js')(backend);
 
         backend.use('/', function (req, res, next) {
             return res.end("Nothing's here");

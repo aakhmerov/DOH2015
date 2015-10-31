@@ -25,6 +25,7 @@ Meal Customization Application for the flights booking
 
    http://localhost:7777/allProducts
    http://localhost:7777/productGroups
+   http://localhost:7777/recipe
 
 ## How to run
 
