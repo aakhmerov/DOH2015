@@ -8,15 +8,14 @@ body {
 }
 
 ul {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-	li {
-		margin: 0;
-		padding: 0;
-	}
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li {
+        margin: 0;
+        padding: 0;
+    }
 }
-
 
 @button-stroke: inset 0 0 0 2px;
 
@@ -41,7 +40,7 @@ ul {
   -webkit-font-smoothing: antialiased;
 
   > .blocks-purple-white {
-    background-color: red;
+    background-color: purple;
     color: white;
   }
 
@@ -55,11 +54,9 @@ ul {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: purple;
     border-radius: 10px;
     // @include transition(all .2s ease-in-out);
     // @include box-shadow(0px 0px 19px 0px rgba(255, 255, 255, 0.5));
- 
     .blocks-text {
       position: absolute;
       top: 50%;
@@ -67,6 +64,17 @@ ul {
       left: 0;
       right: 0;
     }
+  }
+  
+  .blocks-layer-toggle {
+    background-color: rgba(23, 255, 255, 0.2);
+    z-index: 200;
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
   }
 }
 
