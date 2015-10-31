@@ -1,25 +1,45 @@
 /** @jsx React.DOM */
 var React = require('react');
+var $ = require('../../vendor/jquery/dist/jquery.min');
 
 var FoodSelection = React.createClass({
     getInitialState: function() {
-      return this.props;
+      return {recipes:{ recipes: []}};
     },
-    render: function() {
-      var instance = this.state;
-      return (<div className="row">
-	    <ul className="col-md-12">
-	        <li className="col-xs-4 col-sm-3 col-md-3 col-lg-2 col-xl-2">
-	            <div className="blocks">
-	                <div className="blocks-height"></div>
-	                <div className="blocks-layer blocks-purple-white">
-	                    <div className="blocks-text">hallo</div>
-	                </div>
-	            </div>
-	        </li>
-	    </ul>
-	</div>);
-    }
+    componentDidMount: function() {
+    	// Hard coded for now
+    	// have to get this information passed through from robertjan
+    	var instance = this;
+    	var allergies = ["vlees"];
+
+    	var url = '/api/recipesForAllergies';
+
+    	allergies.forEach( function (allergy) {
+    		url += '/' + allergy;
+    	});
+
+    	$.get(url, function(result) {
+    		var recipes = result;
+			if (instance.isMounted()) {
+			    instance.setState({
+			        recipes: recipes
+			    });
+			}
+        });
+    },
+
+	render: function() {
+    	var instance = this.state;
+    	console.log(instance.recipes)
+			return (
+				<div className="recipes">
+		 			{instance.recipes.recipes.map( function (recipe, i) {
+						return(<div className="recipe col col-md-4"><img className="recipe-image" src={recipe.receptafbeelding} />
+						<span className="recipe-title">{recipe.recepttitel}</span></div>);
+					})}
+				</div>
+			);
+	}    
 
 });
 
