@@ -1,6 +1,8 @@
 /** @jsx React.DOM */
 var React = require('react');
 var moment = require('moment');
+var ReactRouter = require('react-router');
+var Link = ReactRouter.Link;
 
 var ActiveFlightWrapper = React.createClass({
     getInitialState: function () {
@@ -123,8 +125,12 @@ var FlightsSelection = React.createClass({
             <div className="flights-list col-xs-8">
             {flightItems}
             </div>
-            <div className="flight-info col-xs-4">
-            {activeFlightInfo}
+            <div className="col-xs-4">
+              <div className="flight-info">
+                {activeFlightInfo}</div>
+              <div className="nav-container">
+                <Link className="confirm-button" to={`/meal`}>Confirm</Link>
+              </div>
             </div>
         </div>);
     }
