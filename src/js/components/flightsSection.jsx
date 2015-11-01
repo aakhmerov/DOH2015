@@ -7,12 +7,36 @@ var ActiveFlightWrapper = React.createClass({
         return this.props;
     },
     render : function () {
+        var d1 = moment(this.props.flight.outboundFlight.departureDateTime).format('YYYY/MM/DD');
+        var t1 = moment(this.props.flight.outboundFlight.departureDateTime).format('HH:mm');
+        var d2 = moment(this.props.flight.outboundFlight.arrivalDateTime).format('YYYY/MM/DD');
+        var t2 = moment(this.props.flight.outboundFlight.arrivalDateTime).format('HH:mm');
+        var from = this.props.flight.outboundFlight.departureAirport.locationCode;
+        var to = this.props.flight.outboundFlight.arrivalAirport.locationCode;
         return (
-            <div>
-                <h4>Your Flight</h4>
+            <div className="flight-info-box">
+                <h3>Flight Information</h3>
+                <hr/>
                 <div className="row">
-                <div className="col-xs-12 text-right">{this.props.flight.outboundFlight.id}</div>
+                    <div className="col-xs-12">{this.props.flight.outboundFlight.id}</div>
                 </div>
+                <div className="row ">
+                    <div className="col-xs-6">Departure:</div>
+                    <div className="col-xs-6 text-right">{d1}</div>
+                </div>
+                <div className="row ">
+                    <div className="col-xs-6">Time:</div>
+                    <div className="col-xs-6 text-right">{t1}-{t2}</div>
+                </div>
+                <div className="row ">
+                    <div className="col-xs-6">Destination:</div>
+                    <div className="col-xs-6 text-right">{to}</div>
+                </div>
+                <div className="row">
+                    <div className="col-xs-6">Total Price:</div>
+                    <div className="col-xs-6 text-right">{this.props.flight.pricingInfoSum.totalPriceOnePassenger} EUR</div>
+                </div>
+
             </div>
             );
     }
@@ -20,10 +44,7 @@ var ActiveFlightWrapper = React.createClass({
 
 var FlightItemWrapper = React.createClass({
     getInitialState: function () {
-        return {
-            active: false,
-            activityStyle: ''
-        };
+        return this.props;
     },
     render: function () {
         var d1 = moment(this.props.flight.outboundFlight.departureDateTime).format('YYYY/MM/DD');
@@ -35,7 +56,7 @@ var FlightItemWrapper = React.createClass({
         return (
             <div className="row">
                 <div className="col-xs-12 cardRow">
-                    <div className={"card " + this.state.activityStyle} onClick={this.props.onClick.bind(null, this)}>
+                    <div className={"card " + this.props.flight.outboundFlight.id} onClick={this.props.onClick.bind(null, this)}>
 
                         <div className="row">
                             <div className="col-xs-12 text-right">{this.props.flight.outboundFlight.id}</div>
@@ -68,13 +89,9 @@ var FlightsSelection = React.createClass({
 
     handleKidsClick : function (event) {
         var flightInformation = event.props;
-        var activity = !event.state.active;
-        var activityStyle = activity ? 'active' : '';
-        event.setState({
-            active: activity,
-            activityStyle: activityStyle,
-
-        });
+//      TODO: this is very bad
+        $('.activeFlight').removeClass('activeFlight');
+        $('.' + flightInformation.flight.outboundFlight.id).addClass('activeFlight');
         this.setState ({
             activeFlight : flightInformation.flight,
             flights: this.props.flights
@@ -83,7 +100,10 @@ var FlightsSelection = React.createClass({
 
     render: function () {
         var flightItems = '';
-        var activeFlightInfo = '';
+        var activeFlightInfo = <div className="flight-info-box">
+                <h3>Flight Information</h3>
+                <hr/>
+                </div>;
         var handleKidsClick = this.handleKidsClick;
         if (this.props.flights) {
             flightItems = [];

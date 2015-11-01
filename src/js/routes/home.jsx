@@ -19,8 +19,8 @@ var HomePage = React.createClass({
 
     render: function() {
       var instance = this.state;
-      return (<div className="col-md-offset-2 col-md-8">
-        <Header active="home"/>
+      return (<div className="col-md-offset-3 col-md-6">
+        <Header active="meal"/>
             <hr/>
             <DietSelection diets={this.state.diets} updateFilter={this.handleFilterUpdate} />
             <label className="ah-permission col-md-12">
