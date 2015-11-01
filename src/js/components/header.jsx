@@ -23,13 +23,13 @@ var Header = React.createClass({
                             <div className="collapse navbar-collapse">
                                 <ul className="nav navbar-nav navbar-right">
                                     <li>
-                                        <Link className={getClassName('flights')} to={`/flights`}>Flight</Link>
+                                        <Link className={getClassName('flights')} to={`/flights`}>Flight &gt;</Link>
                                     </li>
                                     <li>
-                                        <Link className={getClassName('meal')} to={`/meal`}>Meal</Link>
+                                        <Link className={getClassName('meal')} to={`/meal`}>Meal &gt;</Link>
                                     </li>
                                   <li>
-                                    <Link className={getClassName('summary')} to={`/summary`}>Summary</Link>
+                                    <Link className={getClassName('summary')} to={`/summary`}>Confirmation</Link>
                                   </li>
                                 </ul>
                             </div>
