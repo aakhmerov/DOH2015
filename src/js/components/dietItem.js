@@ -10,11 +10,12 @@ var DietItem = React.createClass({
     if (this.state.isSelected) {
       this.setState({
         isSelected: false
-      })
+      });
+      this.props.updateFilter(this.props.diet);
     } else {
       this.setState({
         isSelected: true
-      })
+      });
     };
   },
   render: function() {

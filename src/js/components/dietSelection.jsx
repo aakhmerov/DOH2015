@@ -12,7 +12,6 @@ var DietSelection = React.createClass({
     },
 
     render: function() {
-   		console.log(this)
       var instance = this.props;
       return (<div className="row">
         <h3>Diet</h3>
