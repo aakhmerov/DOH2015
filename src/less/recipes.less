@@ -14,6 +14,7 @@
   background-repeat: no-repeat;
   background-position: center center;
   background-size: 100%;
+  margin: .5em;
 
   .recipe-height {
     margin-top: 100%;
@@ -25,6 +26,7 @@
     bottom: 0;
     left: 0;
     right: 0;
+    margin: 0;
 
     li {
       display: inline-block;
@@ -35,6 +37,17 @@
         width: 75%;
       }
     }
+  }
+
+  .recipe-border:after {
+    content: "";
+    z-index: 200;
+    border: 5px solid #F9BF3B;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
   }
 
   &:hover {
