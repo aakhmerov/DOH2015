@@ -8,12 +8,12 @@ var HomePage = React.createClass({
     getInitialState: function() {
         return {
             diets: ['fruit', 'bread', 'meat', 'seafood', 'vegetable', 'devider', 'soy', 'peanut', 'lactose', 'glutten', 'egg', 'cholesterol'],
-            dietsFilter: []
+            dietsfilter: []
         }
     },
 
     handleFilterUpdate: function(filterValue) {
-        this.state.dietsFilter.push(filterValue);
+        this.state.dietsfilter.push(filterValue);
         this.refs['foodSelection'].forceUpdate();
     },
 
@@ -27,7 +27,7 @@ var HomePage = React.createClass({
                 <input type="checkbox" value="ah-permission" /> Use my AH shopping history to improve suggestions
             </label>
             <hr/>
-            <FoodSelection ref="foodSelection" dietsFilter={this.state.dietsFilter} />
+            <FoodSelection ref="foodSelection" dietsfilter={this.state.dietsfilter} />
         </div>);
     }
 });

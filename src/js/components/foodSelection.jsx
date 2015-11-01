@@ -6,7 +6,7 @@ var FoodSelection = React.createClass({
     getInitialState: function() {
         return {
             recipes: { recipes: []},
-            dietsFilter: this.props.dietsFilter
+            dietsfilter: this.props.dietsfilter
         };
     },
 
@@ -15,9 +15,9 @@ var FoodSelection = React.createClass({
 
     	var url = '/api/recipesForAllergies/';
 
-        for (var i = 0; i < this.state.dietsFilter.length; i++) {
-            url += this.state.dietsFilter[i] + '/';
-            if (i == this.state.dietsFilter.length) {
+        for (var i = 0; i < this.props.dietsfilter.length; i++) {
+            url += this.props.dietsfilter[i] + '/';
+            if (i == this.props.dietsfilter.length) {
                 url = url.substring(0, url.length - 1);
             };
         };
@@ -31,9 +31,18 @@ var FoodSelection = React.createClass({
 			}
         });
     },
-    
+    componentDidUpdate: function() {
+        if (this.isMounted()) {
+            this.setState({
+                recipes: { recipes: []},
+                dietsfilter: this.props.dietsfilter
+            });
+        }
+        
+    }
+
     componentWillUpdate: function() {
-        console.log('update', this.props.dietsfilter);
+
     },
 
 	render: function() {
