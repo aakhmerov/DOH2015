@@ -31,19 +31,27 @@ var FoodSelection = React.createClass({
 			}
         });
     },
-    componentDidUpdate: function() {
-        if (this.isMounted()) {
-            this.setState({
-                recipes: { recipes: []},
-                dietsfilter: this.props.dietsfilter
-            });
-        }
-        
-    },
 
-    componentWillUpdate: function() {
+  update: function () {
+    var instance = this;
 
-    },
+    var url = '/api/recipesForAllergies/';
+
+    for (var i = 0; i < this.props.dietsfilter.length; i++) {
+      url += this.props.dietsfilter[i] + '/';
+      if (i == this.props.dietsfilter.length) {
+        url = url.substring(0, url.length - 1);
+      };
+    };
+
+    $.get(url, function (result) {
+      var recipes = result;
+      instance.setState({
+        recipes: recipes
+      });
+      instance.forceUpdate();
+    });
+  },
 
 	render: function() {
     	var instance = this.state;
@@ -54,7 +62,7 @@ var FoodSelection = React.createClass({
 
                     var blockStyle = {
                         backgroundImage: 'url(http://placehold.it/200x200)'
-                    };  
+                    };
     				return(<div className="recipe col-md-4">
                         <div className="recipe-image" style={blockStyle}>
                             <div className="recipe-height"></div>
@@ -67,7 +75,7 @@ var FoodSelection = React.createClass({
                     </div>);
 			    // })}
 			// </div>);
-	}    
+	}
 });
 
 module.exports = FoodSelection;

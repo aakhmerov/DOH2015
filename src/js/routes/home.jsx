@@ -14,7 +14,7 @@ var HomePage = React.createClass({
 
     handleFilterUpdate: function(filterValue) {
         this.state.dietsfilter.push(filterValue);
-        this.refs['foodSelection'].forceUpdate();
+        this.refs['foodSelection'].update();
     },
 
     render: function() {
