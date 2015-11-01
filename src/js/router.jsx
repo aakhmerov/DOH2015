@@ -9,9 +9,8 @@ var HomePage = require('./routes/home');
 var TransaviaPage = require('./routes/transaviaFlight');
 
 ReactDOM.render((
-  <Router>
-    <Route path="/" component={HomePage} />
-    <Route path="/recipes" component={MyRecipes} />
-    <Route path="/transavia" component={TransaviaPage} />
-  </Router>
-), document.getElementById('root'));
+    <Router>
+        <Route path="/meal" component={HomePage} />
+        <Route path="/flights" component={TransaviaPage} />
+    </Router>
+    ), document.getElementById('root'));

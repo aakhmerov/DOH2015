@@ -15,7 +15,7 @@ var ActiveFlightWrapper = React.createClass({
         var to = this.props.flight.outboundFlight.arrivalAirport.locationCode;
         return (
             <div className="flight-info-box">
-                <h4>Your Flight</h4>
+                <h3>Flight Information</h3>
                 <hr/>
                 <div className="row">
                     <div className="col-xs-12">{this.props.flight.outboundFlight.id}</div>
@@ -101,7 +101,7 @@ var FlightsSelection = React.createClass({
     render: function () {
         var flightItems = '';
         var activeFlightInfo = <div className="flight-info-box">
-                <h4>Your Flight</h4>
+                <h3>Flight Information</h3>
                 <hr/>
                 </div>;
         var handleKidsClick = this.handleKidsClick;
