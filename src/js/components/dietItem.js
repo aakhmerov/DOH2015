@@ -19,9 +19,9 @@ var DietItem = React.createClass({
   },
   render: function() {
     var isSelected = this.state.isSelected;
-    var classes = "blocks-layer img-diet img-"+ this.props.diet;
+    var classes = "blocks-layer img-diet img-"+ this.props.diet + " disabled";
     if (isSelected) {
-      classes = "blocks-layer img-diet img-"+ this.props.diet + " disabled";
+      classes = "blocks-layer img-diet img-"+ this.props.diet;
       this.props.updateFilter(this.props.diet);
     }
     return (<li className="col-xs-2 col-sm-1 col-md-1 col-lg-1 col-xl-1" onClick={this.handleClick}>
