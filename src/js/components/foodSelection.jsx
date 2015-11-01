@@ -39,7 +39,7 @@ var FoodSelection = React.createClass({
             });
         }
         
-    }
+    },
 
     componentWillUpdate: function() {
 
