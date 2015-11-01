@@ -21,7 +21,6 @@ var HomePage = React.createClass({
       } else {
         this.state.dietsfilter.splice(ind, 1);
       }
-      console.log(this.state.dietsfilter);
       this.refs['foodSelection'].update();
     },
 
