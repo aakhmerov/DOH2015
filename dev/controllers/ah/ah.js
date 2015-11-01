@@ -1,21 +1,31 @@
 var async = require('async');
 var request = require('request');
 var fs = require('fs');
+var _ = require('lodash');
 
 var ah = {
     endpoint: 'https://frahmework.ah.nl/ah/json',
     productGroups: 'productgroepen',
     product: 'producten',
     recipes: 'recepten',
+    clients: 'klanten',
+    transactions: 'transacties',
     apikey: 'DpfBSit45NUq7qR1vRg9l7gDQCN9Quj7',
+    clientId: '12721',
     getAHKeyApiParameter: function () {
         return "personalkey=" + this.apikey;
     },
     getProductGroupParameter: function (group) {
         return "assortimentsgroepoms=" + group;
     },
+    getProductGroupIdParameter: function (group) {
+        return "assortimentsgroepnr=" + group;
+    },
     getProductGroupsRequest : function () {
         return this.endpoint + "/" + this.productGroups + "?" + this.getAHKeyApiParameter();
+    },
+    getProductGroupsByIdRequest : function (id) {
+        return this.endpoint + "/" + this.productGroups + "?" +this.getProductGroupIdParameter(id) + '&' + this.getAHKeyApiParameter();
     },
     getProductsInGroupUrl : function (group) {
         return this.endpoint + "/" + this.product + "?" + this.getProductGroupParameter(group) + "&" + this.getAHKeyApiParameter();
@@ -30,8 +40,17 @@ var ah = {
     getRecipeIdParameter : function (id) {
         return "receptid=" + id;
     },
+    getClientIdParameter : function(id) {
+        return 'klantid=' + id;
+    },
     getRecipeByIdUrl : function (id) {
         return this.endpoint + "/" + this.recipes + "?" + this.getRecipeIdParameter(id) + "&" + this.getAHKeyApiParameter();
+    },
+    getUserProfile: function(id) {
+        return this.endpoint + '/' + this.clients + '?' + this.getClientIdParameter(id) + '&' + this.getAHKeyApiParameter()
+    },
+    getTransactionHistory: function (id) {
+        return this.endpoint + '/' + this.transactions + '?' + this.getClientIdParameter(id) + '&' + this.getAHKeyApiParameter()
     }
 };
 
@@ -231,4 +250,75 @@ module.exports = function(backend) {
 //        console.log(results.length);
         res.send({recipes: results});
     });
+
+  var getTransactions = function (callback) {
+    var url = ah.getTransactionHistory(ah.clientId);
+    request(url, function (err, response, body) {
+      // JSON body
+      if (err) {
+        console.log(err);
+        callback(true);
+        return;
+      }
+      var obj = JSON.parse(body);
+      callback(false, obj);
+    });
+  };
+
+  var getCategoryById = function (id, callback) {
+    var url = ah.getProductGroupsByIdRequest(id);
+    request(url, function (err, response, body) {
+      // JSON body
+      if (err) {
+        console.log(err);
+        callback(true);
+        return;
+      }
+      var obj = JSON.parse(body);
+      callback(false, obj);
+    });
+  };
+
+  var processTransactions = function (results, res) {
+
+    var aggregated = _.countBy(results, 'assortimentsgroepnr');
+    var mostPopular = _.chain(aggregated)
+      .map(function (value, k) {
+        return {
+          k: k,
+          v: value
+        };
+      })
+      .sortBy('v')
+      .reverse()
+      .slice(0, 3)
+      .map(function (category) {
+        return getCategoryById.bind(null, category.k);
+      }).value();
+    async.parallel(mostPopular,
+      function (err, results) {
+        if (err) {
+          console.log(err);
+          res.send(500, "Server Error");
+          return;
+        }
+        res.send({popularCat: _.flatten(results)});
+      }
+    );
+  };
+
+  backend.use('/ah/popularCategory/*', function (req, res) {
+    async.parallel([
+        getTransactions
+      ],
+      function (err, results) {
+        if (err) {
+          console.log(err);
+          res.send(500, "Server Error");
+          return;
+        }
+        processTransactions(results[0], res);
+      }
+    );
+  });
 };
