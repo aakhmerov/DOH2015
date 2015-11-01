@@ -28,6 +28,9 @@ var Header = React.createClass({
                                     <li>
                                         <Link className={getClassName('meal')} to={`/meal`}>Meal</Link>
                                     </li>
+                                  <li>
+                                    <Link className={getClassName('summary')} to={`/summary`}>Summary</Link>
+                                  </li>
                                 </ul>
                             </div>
                         </div>
