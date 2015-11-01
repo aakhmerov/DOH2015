@@ -2,20 +2,28 @@
 var React = require('react');
 var moment = require('moment');
 
+var ActiveFlightWrapper = React.createClass({
+    getInitialState: function () {
+        return this.props;
+    },
+    render : function () {
+        return (
+            <div>
+                <h4>Your Flight</h4>
+                <div className="row">
+                <div className="col-xs-12 text-right">{this.props.flight.outboundFlight.id}</div>
+                </div>
+            </div>
+            );
+    }
+});
+
 var FlightItemWrapper = React.createClass({
     getInitialState: function () {
         return {
             active: false,
             activityStyle: ''
         };
-    },
-    handleClick: function () {
-        var activity = !this.state.active;
-        var activityStyle = activity ? 'active' : '';
-        this.setState({
-            active: activity,
-            activityStyle: activityStyle
-        });
     },
     render: function () {
         var d1 = moment(this.props.flight.outboundFlight.departureDateTime).format('YYYY/MM/DD');
@@ -25,25 +33,27 @@ var FlightItemWrapper = React.createClass({
         var from = this.props.flight.outboundFlight.departureAirport.locationCode;
         var to = this.props.flight.outboundFlight.arrivalAirport.locationCode;
         return (
-            <div className="col-xs-12 cardRow">
-                <div className={"card " + this.state.activityStyle} onClick={this.handleClick}>
+            <div className="row">
+                <div className="col-xs-12 cardRow">
+                    <div className={"card " + this.state.activityStyle} onClick={this.props.onClick.bind(null, this)}>
 
-                    <div className="row">
-                        <div className="col-xs-12 text-right">{this.props.flight.outboundFlight.id}</div>
-                    </div>
-                    <div className="col-xs-8">
-                        <div className="row ">
-                            <div className="col-xs-12">{d1}</div>
+                        <div className="row">
+                            <div className="col-xs-12 text-right">{this.props.flight.outboundFlight.id}</div>
                         </div>
-                        <div className="row ">
-                            <div className="col-xs-12">{t1}-{t2}</div>
+                        <div className="col-xs-8">
+                            <div className="row ">
+                                <div className="col-xs-12">{d1}</div>
+                            </div>
+                            <div className="row ">
+                                <div className="col-xs-12">{t1}-{t2}</div>
+                            </div>
+                            <div className="row ">
+                                <div className="col-xs-12 direction">{from}-{to}</div>
+                            </div>
                         </div>
-                        <div className="row ">
-                            <div className="col-xs-12 direction">{from}-{to}</div>
+                        <div className="col-xs-4 text-right">
+                            <img src="//res.cloudinary.com/ideation/image/upload/w_128,h_128/qwbxlw3q1qzeud1okntv.png" className="logo-button"/>
                         </div>
-                    </div>
-                    <div className="col-xs-4 text-right">
-                        <img src="//res.cloudinary.com/ideation/image/upload/w_128,h_128/qwbxlw3q1qzeud1okntv.png" className="logo-button"/>
                     </div>
                 </div>
             </div>
@@ -55,20 +65,43 @@ var FlightsSelection = React.createClass({
     getInitialState: function () {
         return this.props;
     },
+
+    handleKidsClick : function (event) {
+        var flightInformation = event.props;
+        var activity = !event.state.active;
+        var activityStyle = activity ? 'active' : '';
+        event.setState({
+            active: activity,
+            activityStyle: activityStyle,
+
+        });
+        this.setState ({
+            activeFlight : flightInformation.flight,
+            flights: this.props.flights
+        });
+    },
+
     render: function () {
-        var flightItems;
+        var flightItems = '';
+        var activeFlightInfo = '';
+        var handleKidsClick = this.handleKidsClick;
         if (this.props.flights) {
             flightItems = [];
             this.props.flights.map(function (flight, i) {
-                flightItems.push(<FlightItemWrapper locales={['en-US']} flight={flight} key={i}/>)
+                flightItems.push(<FlightItemWrapper onClick={handleKidsClick} locales={['en-US']} flight={flight} key={i}/>)
             });
-        } else {
-            flightItems = '';
         }
-        return (<div className="row">
+        if (this.state.activeFlight) {
+            activeFlightInfo = <ActiveFlightWrapper flight={this.state.activeFlight}/>
+        }
+        return (
+        <div className="row flight-page">
             <h3>Flights</h3>
-            <div className="row">
+            <div className="flights-list col-xs-8">
             {flightItems}
+            </div>
+            <div className="flight-info col-xs-4">
+            {activeFlightInfo}
             </div>
         </div>);
     }

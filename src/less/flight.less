@@ -1,37 +1,45 @@
-.card {
-  height: 10em;
-  border: 1px solid;
-  border-radius: 15px;
-  box-shadow: 2px 2px 1px #c6c6c6;
-  padding: 0 1em 0 1em;
+.flight-page {
+  .card {
+    height: 10em;
+    border: 1px solid;
+    border-radius: 15px;
+    box-shadow: 2px 2px 1px #c6c6c6;
+    padding: 0 1em 0 1em;
 
-  &:hover {
-    box-shadow: 4px 4px 2px #888888;
-  }
-
-  &.active {
-    box-shadow: 2px 2px 1px #fcbb36;
     &:hover {
-      box-shadow: 4px 4px 2px #efb632;
+      box-shadow: 4px 4px 2px #888888;
+    }
+
+    &.active {
+      box-shadow: 2px 2px 1px #fcbb36;
+      &:hover {
+        box-shadow: 4px 4px 2px #efb632;
+      }
+    }
+    .logo-button {
+      max-height: 8em;
+      &:hover {
+
+      }
+    }
+
+    .direction {
+      font-size: 3em;
     }
   }
-  .logo-button {
-    max-height: 8em;
-    &:hover {
 
-    }
+  .flight-info {
+    height: 10em;
+    border: 1px solid;
+    border-radius: 15px;
+    box-shadow: 2px 2px 1px #c6c6c6;
   }
 
-  .direction {
-    font-size: 3em;
+  .text-right {
+    text-align: right;
   }
-}
 
-
-.text-right {
-  text-align: right;
-}
-
-.cardRow {
-  margin-bottom: 0.7em;
+  .cardRow {
+    margin-bottom: 0.7em;
+  }
 }
