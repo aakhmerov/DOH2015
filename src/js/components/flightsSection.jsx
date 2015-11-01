@@ -120,8 +120,18 @@ var FlightsSelection = React.createClass({
         return (
         <div className="row flight-page">
             <h3>Flights</h3>
+<<<<<<< HEAD
             <div className="flight-info col-md-4">
             {activeFlightInfo}
+=======
+            <div className="flights-list col-xs-8">
+            {flightItems}
+            </div>
+            <div className="col-xs-4">
+              <div className="flight-info">
+                {activeFlightInfo}</div>
+
+>>>>>>> 318219d9f63fe459ef0852441c7b7b5994124d57
             </div>
             <div className="flights-list col-md-8">
             {flightItems}

@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 var React = require('react');
 var $ = require('../../vendor/jquery/dist/jquery.min');
+var FoodItem = require('./foodItem');
 
 var FoodSelection = React.createClass({
     getInitialState: function() {
@@ -59,20 +60,7 @@ var FoodSelection = React.createClass({
         return (<div className="recipes">
                 <h3>Meals for you</h3>
 	 			{instance.recipes.recipes.map( function (recipe, i) {
-
-                    var blockStyle = {
-                        backgroundImage: 'url('+recipe.receptafbeelding+')'
-                    };
-    				return(<div className="recipe col-md-4">
-                        <div className="recipe-image" style={blockStyle}>
-                            <div className="recipe-height"></div>
-                            <ul className="recipe-badges">
-                                <li><img src="/public/img/allergens/egg.png" /></li>
-                                <li><img src="/public/img/allergens/soy.png" /></li>
-                                <li><img src="/public/img/allergens/egg.png" /></li>
-                            </ul>
-                        </div>
-                    </div>);
+    				return(<FoodItem recipe={recipe}/>);
 			    })}
 			</div>);
 	}
