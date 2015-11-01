@@ -7,12 +7,36 @@ var ActiveFlightWrapper = React.createClass({
         return this.props;
     },
     render : function () {
+        var d1 = moment(this.props.flight.outboundFlight.departureDateTime).format('YYYY/MM/DD');
+        var t1 = moment(this.props.flight.outboundFlight.departureDateTime).format('HH:mm');
+        var d2 = moment(this.props.flight.outboundFlight.arrivalDateTime).format('YYYY/MM/DD');
+        var t2 = moment(this.props.flight.outboundFlight.arrivalDateTime).format('HH:mm');
+        var from = this.props.flight.outboundFlight.departureAirport.locationCode;
+        var to = this.props.flight.outboundFlight.arrivalAirport.locationCode;
         return (
-            <div>
+            <div className="flight-info-box">
                 <h4>Your Flight</h4>
+                <hr/>
                 <div className="row">
-                <div className="col-xs-12 text-right">{this.props.flight.outboundFlight.id}</div>
+                    <div className="col-xs-12">{this.props.flight.outboundFlight.id}</div>
                 </div>
+                <div className="row ">
+                    <div className="col-xs-6">Departure:</div>
+                    <div className="col-xs-6 text-right">{d1}</div>
+                </div>
+                <div className="row ">
+                    <div className="col-xs-6">Time:</div>
+                    <div className="col-xs-6 text-right">{t1}-{t2}</div>
+                </div>
+                <div className="row ">
+                    <div className="col-xs-6">Destination:</div>
+                    <div className="col-xs-6 text-right">{to}</div>
+                </div>
+                <div className="row">
+                    <div className="col-xs-6">Total Price:</div>
+                    <div className="col-xs-6 text-right">{this.props.flight.pricingInfoSum.totalPriceOnePassenger} EUR</div>
+                </div>
+
             </div>
             );
     }
@@ -83,7 +107,10 @@ var FlightsSelection = React.createClass({
 
     render: function () {
         var flightItems = '';
-        var activeFlightInfo = '';
+        var activeFlightInfo = <div className="flight-info-box">
+                <h4>Your Flight</h4>
+                <hr/>
+                </div>;
         var handleKidsClick = this.handleKidsClick;
         if (this.props.flights) {
             flightItems = [];
