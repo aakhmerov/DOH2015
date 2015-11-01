@@ -5,11 +5,12 @@ var $ = require('../../vendor/jquery/dist/jquery.min');
 var FoodSelection = React.createClass({
     getInitialState: function() {
         return {
-            recipes: { recipes: []}
+            recipes: { recipes: []},
+            dietsfilter : {}
         };
     },
-    
-    componentDidMount: function() {        
+
+    componentDidMount: function() {
       	var instance = this;
 
     	var url = '/api/recipesForAllergies/';
@@ -30,7 +31,10 @@ var FoodSelection = React.createClass({
 			}
         });
     },
-    
+  componentWillUpdate: function() {
+    console.log('update', this.props.dietsfilter);
+  },
+
 	render: function() {
     	var instance = this.state;
 		console.log(instance)
@@ -49,7 +53,7 @@ var FoodSelection = React.createClass({
                     </div>);
 			    })}
 			</div>);
-	}    
+	}
 
 });
 
