@@ -9,7 +9,7 @@ var Link = ReactRouter.Link;
 var HomePage = React.createClass({
     getInitialState: function() {
         return {
-            diets: ['fruit', 'brood', 'vlees', 'vis', 'vegetarisch', 'soy', 'noten', 'lactose', 'glutten', 'ei', 'cholesterol'],
+            diets: ['fruit', 'brood', 'vlees', 'vis', 'vegetarisch', 'soy', 'noten', 'lactose', 'glutten', 'ei', 'cholesterol', 'user'],
             dietsfilter: []
         }
     },
@@ -28,11 +28,11 @@ var HomePage = React.createClass({
         <label className="ah-permission col-md-12">
           <input type="checkbox" value="ah-permission"/> Use my AH shopping history to improve suggestions
         </label>
-        <div className="nav-container pull-right">
-          <Link className="confirm-button" to={`/summary`}>Confirm</Link>
-        </div>
         <hr/>
         <FoodSelection ref="foodSelection" dietsfilter={this.state.dietsfilter} />
+        <div className="nav-container pull-right">
+            <Link className="confirm-button" to={`/summary`}>Confirm</Link>
+        </div>
         </div>);
     }
 });
