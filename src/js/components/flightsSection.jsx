@@ -90,8 +90,8 @@ var FlightsSelection = React.createClass({
     handleKidsClick : function (event) {
         var flightInformation = event.props;
 //      TODO: this is very bad
-        $('.active').removeClass('active');
-        $('.' + flightInformation.flight.outboundFlight.id).addClass('active');
+        $('.activeFlight').removeClass('activeFlight');
+        $('.' + flightInformation.flight.outboundFlight.id).addClass('activeFlight');
         this.setState ({
             activeFlight : flightInformation.flight,
             flights: this.props.flights

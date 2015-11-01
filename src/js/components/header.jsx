@@ -23,7 +23,7 @@ var Header = React.createClass({
                             <div className="collapse navbar-collapse">
                                 <ul className="nav navbar-nav navbar-right">
                                     <li>
-                                        <Link className={getClassName('transavia')} to={`/flights`}>Flight</Link>
+                                        <Link className={getClassName('flights')} to={`/flights`}>Flight</Link>
                                     </li>
                                     <li>
                                         <Link className={getClassName('meal')} to={`/meal`}>Meal</Link>

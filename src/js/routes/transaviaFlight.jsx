@@ -28,7 +28,7 @@ var TransaviaPage = React.createClass({
     render: function() {
         return (
         <div className="col-md-offset-3 col-md-6">
-            <Header active="transavia"/>
+            <Header active="flights"/>
             <FlightsSelection flights={this.state.flightOffer}/>
         </div>);
     }
