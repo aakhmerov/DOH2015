@@ -4,55 +4,56 @@ var $ = require('../../vendor/jquery/dist/jquery.min');
 var FoodItem = require('./foodItem');
 
 var FoodSelection = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         return {
             recipes: { recipes: []},
             dietsfilter: this.props.dietsfilter
         };
     },
 
-    componentDidMount: function() {
-      	var instance = this;
+    componentDidMount: function () {
+        var instance = this;
 
-    	var url = '/api/recipesForAllergies/';
+        var url = '/api/recipesForAllergies/';
 
         for (var i = 0; i < this.props.dietsfilter.length; i++) {
             url += this.props.dietsfilter[i] + '/';
             if (i == this.props.dietsfilter.length) {
                 url = url.substring(0, url.length - 1);
-            };
-        };
+            }
+        }
 
-    	$.get(url, function(result) {
-    		var recipes = result;
+
+        $.get(url, function (result) {
+            var recipes = result;
             if (instance.isMounted()) {
-			    instance.setState({
-			        recipes: recipes
-			    });
-			}
+                instance.setState({
+                    recipes: recipes
+                });
+            }
         });
     },
 
-  update: function () {
-    var instance = this;
+    update: function () {
+        var instance = this;
 
-    var url = '/api/recipesForAllergies/';
+        var url = '/api/recipesForAllergies/';
 
-    for (var i = 0; i < this.props.dietsfilter.length; i++) {
-      url += this.props.dietsfilter[i] + '/';
-      if (i == this.props.dietsfilter.length) {
-        url = url.substring(0, url.length - 1);
-      };
-    };
+        for (var i = 0; i < this.props.dietsfilter.length; i++) {
+            url += this.props.dietsfilter[i] + '/';
+            if (i == this.props.dietsfilter.length) {
+                url = url.substring(0, url.length - 1);
+            }
 
-    $.get(url, function (result) {
-      var recipes = result;
-      instance.setState({
-        recipes: recipes
-      });
-      instance.forceUpdate();
-    });
-  },
+        }
+        $.get(url, function (result) {
+            var recipes = result;
+            instance.setState({
+                recipes: recipes
+            });
+            instance.forceUpdate();
+        });
+    },
 
 	render: function() {
     	var instance = this.state;
