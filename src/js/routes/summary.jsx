@@ -8,6 +8,12 @@ var SummaryPage = React.createClass({
     return (
       <div className="col-md-offset-3 col-md-6">
         <Header active="summary"/>
+        <hr/>
+        <div className="summary">
+          <h3>Confirmation</h3>
+          <p>Your inflight meal selection has been confirmed.</p>
+          <h3>Thank you</h3>
+        </div>
       </div>);
   }
 });

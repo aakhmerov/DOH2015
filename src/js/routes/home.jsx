@@ -15,8 +15,13 @@ var HomePage = React.createClass({
     },
 
     handleFilterUpdate: function(filterValue) {
+      var ind = this.state.dietsfilter.indexOf(filterValue);
+      if (ind === -1) {
         this.state.dietsfilter.push(filterValue);
-        this.refs['foodSelection'].update();
+      } else {
+        this.state.dietsfilter.splice(ind, 1);
+      }
+      this.refs['foodSelection'].update();
     },
 
     render: function() {
