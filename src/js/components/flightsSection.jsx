@@ -44,10 +44,7 @@ var ActiveFlightWrapper = React.createClass({
 
 var FlightItemWrapper = React.createClass({
     getInitialState: function () {
-        return {
-            active: false,
-            activityStyle: ''
-        };
+        return this.props;
     },
     render: function () {
         var d1 = moment(this.props.flight.outboundFlight.departureDateTime).format('YYYY/MM/DD');
@@ -59,7 +56,7 @@ var FlightItemWrapper = React.createClass({
         return (
             <div className="row">
                 <div className="col-xs-12 cardRow">
-                    <div className={"card " + this.state.activityStyle} onClick={this.props.onClick.bind(null, this)}>
+                    <div className={"card " + this.props.flight.outboundFlight.id} onClick={this.props.onClick.bind(null, this)}>
 
                         <div className="row">
                             <div className="col-xs-12 text-right">{this.props.flight.outboundFlight.id}</div>
@@ -92,13 +89,9 @@ var FlightsSelection = React.createClass({
 
     handleKidsClick : function (event) {
         var flightInformation = event.props;
-        var activity = !event.state.active;
-        var activityStyle = activity ? 'active' : '';
-        event.setState({
-            active: activity,
-            activityStyle: activityStyle,
-
-        });
+//      TODO: this is very bad
+        $('.active').removeClass('active');
+        $('.' + flightInformation.flight.outboundFlight.id).addClass('active');
         this.setState ({
             activeFlight : flightInformation.flight,
             flights: this.props.flights
