@@ -4,7 +4,18 @@ var moment = require('moment');
 
 var FlightItemWrapper = React.createClass({
     getInitialState: function () {
-        return this.props;
+        return {
+            active : false,
+            activityStyle : ''
+        };
+    },
+    handleClick : function () {
+        var activity = !this.state.active;
+        var activityStyle = activity ? 'active' : '';
+        this.setState({
+            active : activity,
+            activityStyle : activityStyle
+        });
     },
     render : function () {
         var d1 = moment(this.props.flight.outboundFlight.departureDateTime).format('YYYY/MM/DD');
@@ -13,7 +24,7 @@ var FlightItemWrapper = React.createClass({
         var t2 = moment(this.props.flight.outboundFlight.arrivalDateTime).format('HH:mm');
         return (
             <div className="col-xs-12 cardRow">
-                <div className="card">
+                <div className={"card " + this.state.activityStyle} onClick={this.handleClick}>
                     <div className="row">
                         <div className="col-xs-12 text-right">{this.props.flight.outboundFlight.id}</div>
                     </div>
