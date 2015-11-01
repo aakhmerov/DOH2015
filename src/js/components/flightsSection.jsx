@@ -46,6 +46,9 @@ var FlightItemWrapper = React.createClass({
     getInitialState: function () {
         return this.props;
     },
+    goToMeal : function () {
+        window.location.hash = '/meal';
+    },
     render: function () {
         var d1 = moment(this.props.flight.outboundFlight.departureDateTime).format('YYYY/MM/DD');
         var t1 = moment(this.props.flight.outboundFlight.departureDateTime).format('HH:mm');
@@ -73,7 +76,7 @@ var FlightItemWrapper = React.createClass({
                             </div>
                         </div>
                         <div className="col-xs-4 text-right">
-                            <img src="//res.cloudinary.com/ideation/image/upload/w_128,h_128/qwbxlw3q1qzeud1okntv.png" className="logo-button"/>
+                            <img onClick={this.goToMeal} src="//res.cloudinary.com/ideation/image/upload/w_128,h_128/qwbxlw3q1qzeud1okntv.png" className="logo-button"/>
                         </div>
                     </div>
                 </div>
