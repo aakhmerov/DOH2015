@@ -44,7 +44,7 @@ var FoodSelection = React.createClass({
                 <h3>Meals for you</h3>
 	 			{instance.recipes.recipes.map( function (recipe, i) {
 					return(<div className="recipe col col-md-4"><img className="recipe-image" src={recipe.receptafbeelding} />
-					<span className="recipe-title">{recipe.recepttitel}</span></div>);
+					<div className="recipe-title">{recipe.recepttitel}</div></div>);
 				})}
 			</div>
 		);
