@@ -17,7 +17,11 @@ var FoodSelection = React.createClass({
         var url = '/api/recipesForAllergies/';
 
         for (var i = 0; i < this.props.dietsfilter.length; i++) {
-            url += this.props.dietsfilter[i] + '/';
+            if ('user' == this.props.dietsfilter[i]) {
+                url += 'vis/vlees/fruit/';                
+            } else {
+                url += this.props.dietsfilter[i] + '/';
+            }
             if (i == this.props.dietsfilter.length) {
                 url = url.substring(0, url.length - 1);
             }
@@ -40,7 +44,11 @@ var FoodSelection = React.createClass({
         var url = '/api/recipesForAllergies/';
 
         for (var i = 0; i < this.props.dietsfilter.length; i++) {
-            url += this.props.dietsfilter[i] + '/';
+            if ('user' == this.props.dietsfilter[i]) {
+                url += 'vis/vlees/fruit/';                
+            } else {
+                url += this.props.dietsfilter[i] + '/';
+            }
             if (i == this.props.dietsfilter.length) {
                 url = url.substring(0, url.length - 1);
             }
