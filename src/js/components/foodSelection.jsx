@@ -10,7 +10,7 @@ var FoodSelection = React.createClass({
         };
     },
 
-    componentDidMount: function() {        
+    componentDidMount: function() {
       	var instance = this;
 
     	var url = '/api/recipesForAllergies/';
@@ -32,6 +32,10 @@ var FoodSelection = React.createClass({
         });
     },
     
+    componentWillUpdate: function() {
+        console.log('update', this.props.dietsfilter);
+    },
+
 	render: function() {
     	var instance = this.state;
 		console.log(instance)
@@ -55,7 +59,6 @@ var FoodSelection = React.createClass({
 			    // })}
 			// </div>);
 	}    
-
 });
 
 module.exports = FoodSelection;

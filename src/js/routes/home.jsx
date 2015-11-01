@@ -3,7 +3,7 @@ var React = require('react');
 var Header = require('../components/header');
 var FoodSelection = require('./../components/foodSelection');
 var DietSelection = require('./../components/dietSelection');
- 
+
 var HomePage = React.createClass({
     getInitialState: function() {
         return {
@@ -14,9 +14,9 @@ var HomePage = React.createClass({
 
     handleFilterUpdate: function(filterValue) {
         this.state.dietsFilter.push(filterValue);
-        console.log(this.state.dietsFilter);
+        this.refs['foodSelection'].forceUpdate();
     },
- 
+
     render: function() {
       var instance = this.state;
       return (<div className="col-md-offset-2 col-md-8">
@@ -27,8 +27,9 @@ var HomePage = React.createClass({
                 <input type="checkbox" value="ah-permission" /> Use my AH shopping history to improve suggestions
             </label>
             <hr/>
-            <FoodSelection dietsFilter={this.state.dietsFilter} />
+            <FoodSelection ref="foodSelection" dietsFilter={this.state.dietsFilter} />
         </div>);
     }
 });
 module.exports = HomePage;
+
