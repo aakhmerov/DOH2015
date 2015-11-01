@@ -27,7 +27,7 @@ var HomePage = React.createClass({
                 <input type="checkbox" value="ah-permission" /> Use my AH shopping history to improve suggestions
             </label>
             <hr/>
-            <FoodSelection ref="foodSelection" dietsfilter={this.state.dietsFilter} />
+            <FoodSelection ref="foodSelection" dietsFilter={this.state.dietsFilter} />
         </div>);
     }
 });

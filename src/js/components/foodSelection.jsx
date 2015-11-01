@@ -5,8 +5,7 @@ var $ = require('../../vendor/jquery/dist/jquery.min');
 var FoodSelection = React.createClass({
     getInitialState: function() {
         return {
-            recipes: { recipes: []},
-            dietsfilter : {}
+            recipes: { recipes: []}
         };
     },
 
