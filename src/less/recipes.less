@@ -1,7 +1,39 @@
-.recipe {
-	text-align: center;
+.recipe-image {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  transition: box-shadow .5s;
+  outline: none;
+  text-decoration: none;
+  width: 100%;
+  display: inline-block;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100%;
 
-	.recipe-image {
-		max-width: 200px;
-	}
+  .recipe-height {
+    margin-top: 100%;
+  }
+
+  .recipe-badges {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    li {
+      display: inline-block;
+      float: left;
+      margin: 2px;
+
+      img {
+        width: 75%;
+      }
+    }
+  }
 }
