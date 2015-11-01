@@ -225,7 +225,14 @@ module.exports = function(backend) {
 //  cholesterolarm, glutenvrij, lactosevrij,
     backend.use('/recipesForAllergies/*', function (req, res, next) {
         var allergies = req.params[0].split('/');
-        console.log(onlineRecipes.length);
+        var cleanA = [];
+        for (var k = 0; k < allergies.length; k++) {
+            if (allergies[k]) {
+                cleanA.push(allergies[k]);
+            }
+        }
+        allergies = cleanA;
+        console.log(allergies);
         var results = [];
 
         for (var i = 0; i < onlineRecipes.length; i++) {
