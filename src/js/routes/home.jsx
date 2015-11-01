@@ -23,6 +23,9 @@ var HomePage = React.createClass({
         <Header active="home"/>
             <hr/>
             <DietSelection diets={this.state.diets} updateFilter={this.handleFilterUpdate} />
+            <label className="ah-permission col-md-12">
+                <input type="checkbox" value="ah-permission" /> Use my AH shopping history to improve suggestions
+            </label>
             <hr/>
             <FoodSelection dietsFilter={this.state.dietsFilter} />
         </div>);
