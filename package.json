@@ -22,7 +22,8 @@
     "react-router": "^1.0.0-rc2",
     "request": "~2.50.0",
     "serve-favicon": "^2.3.0",
-    "moment" : "^2.4.0"
+    "moment" : "^2.4.0",
+    "react-intl" : "^1.2.1"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
