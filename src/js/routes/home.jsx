@@ -7,7 +7,7 @@ var DietSelection = require('./../components/dietSelection');
 var HomePage = React.createClass({
     getInitialState: function() {
         return {
-            diets: ['fruit', 'brood', 'vlees', 'vis', 'vegetarisch', 'devider', 'soy', 'noten', 'lactose', 'glutten', 'ei', 'cholesterol'],
+            diets: ['fruit', 'brood', 'vlees', 'vis', 'vegetarisch', 'soy', 'noten', 'lactose', 'glutten', 'ei', 'cholesterol'],
             dietsfilter: []
         }
     },
