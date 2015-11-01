@@ -14,7 +14,7 @@ var HomePage = React.createClass({
  
     handleFilterUpdate: function(filterValue) {
         this.state.dietsFilter.push(filterValue);
-        console.log(this.state.dietsFilter)
+        // console.log(this.state.dietsFilter)
     },
  
     render: function() {

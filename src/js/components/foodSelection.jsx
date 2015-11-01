@@ -8,17 +8,12 @@ var FoodSelection = React.createClass({
             recipes: { recipes: []}
         };
     },
-    componentDidMount: function() {
-    	// Hard coded for now
-    	// have to get this information passed through from robertjan
-        this.setState({
-            allergies: this.props.dietsfilter
-        });
-        
+
+    componentDidMount: function() {        
         console.log(this.props.dietsfilter);
       	var instance = this;
         console.log(this);
-    	var allergies = this.state.allergies;
+    	var allergies = this.props.allergies;
 
     	var url = '/api/recipesForAllergies';
 
