@@ -56,12 +56,12 @@ var FoodSelection = React.createClass({
 	render: function() {
     	var instance = this.state;
 		console.log(instance)
-        // return (<div className="recipes">
-                // <h3>Meals for you</h3>
-	 			// {instance.recipes.recipes.map( function (recipe, i) {
+        return (<div className="recipes">
+                <h3>Meals for you</h3>
+	 			{instance.recipes.recipes.map( function (recipe, i) {
 
                     var blockStyle = {
-                        backgroundImage: 'url(http://placehold.it/200x200)'
+                        backgroundImage: 'url('+recipe.receptafbeelding+')'
                     };
     				return(<div className="recipe col-md-4">
                         <div className="recipe-image" style={blockStyle}>
@@ -73,8 +73,8 @@ var FoodSelection = React.createClass({
                             </ul>
                         </div>
                     </div>);
-			    // })}
-			// </div>);
+			    })}
+			</div>);
 	}
 });
 
