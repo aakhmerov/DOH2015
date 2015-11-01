@@ -5,18 +5,20 @@ var $ = require('../../vendor/jquery/dist/jquery.min');
 var FoodSelection = React.createClass({
     getInitialState: function() {
         return {
-            recipes: { recipes: []},
-            allergies: ["glutenvrij"]
+            recipes: { recipes: []}
         };
     },
-
+    
     componentDidMount: function() {        
       	var instance = this;
 
-    	var url = '/api/recipesForAllergies';
+    	var url = '/api/recipesForAllergies/';
 
-        for (var i = 0; i < this.state.allergies.length; i++) {
-            url += '/' + this.state.allergies[i];
+        for (var i = 0; i < this.props.dietsFilter.length; i++) {
+            url += this.props.dietsFilter[i] + '/';
+            if (i == this.props.dietsFilter.length) {
+                url = url.substring(0, url.length - 1);
+            };
         };
 
     	$.get(url, function(result) {
@@ -31,9 +33,8 @@ var FoodSelection = React.createClass({
     
 	render: function() {
     	var instance = this.state;
-		
-        return (
-			<div className="recipes">
+		console.log(instance)
+        return (<div className="recipes">
                 <h3>Meals for you</h3>
 	 			{instance.recipes.recipes.map( function (recipe, i) {
 					return(<div className="recipe col col-md-4">
@@ -46,7 +47,7 @@ var FoodSelection = React.createClass({
                             </ul>
                         </div>
                     </div>);
-				    })}
+			    })}
 			</div>);
 	}    
 

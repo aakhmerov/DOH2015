@@ -6,15 +6,15 @@ var DietSelection = require('./../components/dietSelection');
  
 var HomePage = React.createClass({
     getInitialState: function() {
-      return {
-        diets: ['fruit', 'bread', 'meat', 'seafood', 'vegetable', 'devider', 'soy', 'peanut', 'lactose', 'glutten', 'egg', 'cholesterol'],
-        dietsFilter: []
-      }
+        return {
+            diets: ['fruit', 'bread', 'meat', 'seafood', 'vegetable', 'devider', 'soy', 'peanut', 'lactose', 'glutten', 'egg', 'cholesterol'],
+            dietsFilter: []
+        }
     },
- 
+
     handleFilterUpdate: function(filterValue) {
         this.state.dietsFilter.push(filterValue);
-        // console.log(this.state.dietsFilter)
+        console.log(this.state.dietsFilter);
     },
  
     render: function() {
@@ -24,7 +24,7 @@ var HomePage = React.createClass({
             <hr/>
             <DietSelection diets={this.state.diets} updateFilter={this.handleFilterUpdate} />
             <hr/>
-            <FoodSelection dietsfilter={this.state.dietsFilter} />
+            <FoodSelection dietsFilter={this.state.dietsFilter} />
         </div>);
     }
 });
