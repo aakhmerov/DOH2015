@@ -23,7 +23,7 @@ var DietItem = React.createClass({
         var classes = "blocks-layer img-diet img-"+ this.props.diet;
         if (isSelected) {
             classes = "blocks-layer img-diet img-"+ this.props.diet + " disabled";
-			this.props.updateFilter('lol');
+			this.props.updateFilter(this.props.diet);
         }
         return (<li className="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" onClick={this.handleClick}>
                     <div className="blocks">

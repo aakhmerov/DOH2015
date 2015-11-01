@@ -4,13 +4,21 @@ var $ = require('../../vendor/jquery/dist/jquery.min');
 
 var FoodSelection = React.createClass({
     getInitialState: function() {
-      return {recipes:{ recipes: []}};
+        return {
+            recipes: { recipes: []}
+        };
     },
     componentDidMount: function() {
     	// Hard coded for now
     	// have to get this information passed through from robertjan
-    	var instance = this;
-    	var allergies = ["vlees"];
+        this.setState({
+            allergies: this.props.dietsfilter
+        });
+        
+        console.log(this.props.dietsfilter);
+      	var instance = this;
+        console.log(this);
+    	var allergies = this.state.allergies;
 
     	var url = '/api/recipesForAllergies';
 
@@ -20,25 +28,26 @@ var FoodSelection = React.createClass({
 
     	$.get(url, function(result) {
     		var recipes = result;
-			if (instance.isMounted()) {
+            if (instance.isMounted()) {
 			    instance.setState({
 			        recipes: recipes
 			    });
 			}
         });
     },
-
+    
 	render: function() {
     	var instance = this.state;
-			return (
-				<div className="recipes">
-                    <h3>Meals for you</h3>
-		 			{instance.recipes.recipes.map( function (recipe, i) {
-						return(<div className="recipe col col-md-4"><img className="recipe-image" src={recipe.receptafbeelding} />
-						<span className="recipe-title">{recipe.recepttitel}</span></div>);
-					})}
-				</div>
-			);
+		
+        return (
+			<div className="recipes">
+                <h3>Meals for you</h3>
+	 			{instance.recipes.recipes.map( function (recipe, i) {
+					return(<div className="recipe col col-md-4"><img className="recipe-image" src={recipe.receptafbeelding} />
+					<span className="recipe-title">{recipe.recepttitel}</span></div>);
+				})}
+			</div>
+		);
 	}    
 
 });
